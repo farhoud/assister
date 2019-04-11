@@ -1,0 +1,26 @@
+{
+  "name": "tfxi",
+  "version": "0.0.1",
+  "description": "Terms and Functions language interpreter",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/assister-ai/assister.git",
+    "directory": "packages/tfxi"
+  },
+  "keywords": [
+    "tfx",
+    "interpreter"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/assister-ai/assister/issues"
+  },
+  "homepage": "https://github.com/assister-ai/assister#readme",
+  "devDependencies": {
+    "ava": "^1.4.1"
+  }
+}
