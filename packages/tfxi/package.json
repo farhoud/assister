@@ -22,5 +22,8 @@
   "homepage": "https://github.com/assister-ai/assister#readme",
   "devDependencies": {
     "ava": "^1.4.1"
+  },
+  "dependencies": {
+    "jsonld": "^1.6.0"
   }
 }
