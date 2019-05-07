@@ -1,0 +1,44 @@
+<tfx>
+    <terminology uri="spreadsheet:terms/sheet">
+        <term name="type">
+            <case pattern="number"/>
+            <case pattern="date"/>
+        </term>
+
+        <term name="cell" pattern="${'A':'Z' 0:N}"/>
+        <term name="range"
+            description="A ${range} is an (interval)[https://en.wikipedia.org/wiki/Interval_(mathematics)] of ${cell}s with a ${start} and an ${end}"
+            more="https://www.computerhope.com/jargon/r/range.htm"
+        >
+            <term name="start" isa="cell"/>
+            <term name="end" isa="cell"/>
+            <case pattern="${start ':' end}"/>
+        </term>
+        <term name="selection"
+            pattern="${((cell ',') | (range ',')) ... cell | range}"
+        />
+    </terminology>
+
+    <execution uri="spreadsheet:sheet" module="./sheet.js">
+        <function name="format"/>
+        <function name="setCurrentSelection"/>
+
+        <variable name="types"/>
+        <variable name="currentSelection"/>
+    </execution>
+
+    <command name="format" pattern="format ${selection | ''} as ${type}">
+        <variable name="selection" term="selection"/>
+        <variable name="type" term="type" map="type => types[type]"/>
+        <intent given="[selection, type]" value="format(selection, type)">
+            <effect then="() => setCurrentSelection(selection)"/>
+            <example command="format J9:K14,L9,M9,N9:O14,K17:N25 as number"
+                given="[selection, type]"
+                equals="['J9:K14,L9,M9,N9:O14,K17:N25', types['number']]"
+            />
+        </intent>
+        <intent given="[type]" value="format(currentSelection, type)">
+            <example command="format as date" given="[type]" equals="[types['date']]"/>
+        </intent>
+    </command>
+</tfx>
